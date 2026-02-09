@@ -228,7 +228,7 @@
             
              <p class="exp-text"> <span class="binance-badge">Certificaciones:</span>
             </p>1.- Ingeniero Industrial <span class="years-badge">UNEG, </span>Puerto Ordaz 2010</p>
-            </p>2.- Componente Docente <b>216 hrs</b> <span class="years-badge">UNEG, </span>Puerto Ordaz 2013</p>
+            </p>2.- Diplomado Componente Docente <b>216 hrs</b> <span class="years-badge">UNEG, </span>Puerto Ordaz 2013</p>
             </p>3.- Consultor Elearning <b>152 hrs,</b> <span class="years-badge">Aula Global,  </span>Mérida 2015</p>
             </p>4.- TAE - Tecnología aplicada a la educación <span class="years-badge">FATLA, </span>Ecuador 2012</p>
             </p>5.- Bootcamp Criptomonedas <span class="years-badge">Binance, </span>Binance Academy 2023</p>
@@ -321,21 +321,42 @@
         function enviarRecibo() {
         const n = document.getElementById('nom').value;
         const c = document.getElementById('ced').value;
+        const d = document.getElementById('wha').value;
         const t = document.getElementById('total-val').innerText;
-        if(!n || !c) return alert("Por favor rellena tus datos.");
-        
+
+        // Validación corregida con ||
+          if (!n || !c || !d || !t) return alert("Por favor rellena tus datos.");
+
+        // Usaremos consistentemente la variable 'msg'
         let msg = `*SOLICITUD DE INSCRIPCIÓN*%0A`;
-        msg += `*Instructor:* Gabriel Grillet%0A`;
-        msg += `*Estudiante:* ${n}%0A`;
-        msg += `*Cédula:* ${c}%0A`;
-        msg += `*Monto Total:* ${t}%0A`;
-        msg += `--------------------------%0A`;
-        msg += `_Enviado desde el Gestor Educativo_`;
-        
-        window.open(`https://wa.me/584249408721?text=${msg}`, '_blank');
+         msg += `*Instructor:* Gabriel Grillet%0A`;
+         msg += `--------------------------------%0A`; // Añadido %0A para salto de línea
+         msg += `👤 *Estudiante:* ${n}%0A`;
+         msg += `🆔 *Cédula:* ${c}%0A`;
+         msg += `📱 *WA:* ${d}%0A`;
+         msg += `--------------------------------%0A`;
+
+          // CORRECCIÓN: Cambiado 'mensaje' por 'msg' en todas las líneas
+         if (cantidades.cripto > 0) {
+           msg += `• Cripto (${cantidades.cripto}): $${(cantidades.cripto * 16).toFixed(2)}%0A`;
+            }
+        if (cantidades.cripto2 > 0) {
+           msg += `• Cripto Avanzado (${cantidades.cripto2}): $${(cantidades.cripto2 * 180).toFixed(2)}%0A`;
+            }
+        if (cantidades.ins > 0) {
+           msg += `• Trading Ins. (${cantidades.ins}): $${(cantidades.ins * 4).toFixed(2)}%0A`;
+           }
+        if (cantidades.mensual > 0) {
+        msg += `• Trading Mens. (${cantidades.mensual}): $${(cantidades.mensual * 52).toFixed(2)}%0A`;
+           }
+
+          msg += `--------------------------%0A`;
+          msg += `*Monto Total:* ${t}%0A`;
+          msg += `--------------------------%0A`;
+          msg += `_Enviado desde el Gestor Educativo_`;
+
+    window.open(`https://wa.me/584249408721?text=${msg}`, '_blank');
     }
-
-</script>
-
-</body>
+  </script>
+ </body>
 </html>
