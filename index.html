@@ -3,157 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripción Académica - Checkout</title>
+    <title>Inscripción Académica - Gestión Educativa</title>
     <style>
         :root {
-            --primary: #2563eb;
+           --primary: #2563eb;
             --success: #25d366;
+            --binance: #F3BA2F; /* Color corporativo Binance */
             --dark: #1f2937;
             --bg: #f3f4f6;
             --white: #ffffff;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            font-family: 'Segoe UI', sans-serif; 
             background-color: var(--bg); 
-            margin: 0; 
-            padding: 20px; 
-            display: flex; 
-            justify-content: center;
+            margin: 0; padding: 20px; 
+            display: flex; justify-content: center;
         }
 
         .main-container {
             width: 100%;
             max-width: 600px;
             background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
+        /* Cabecera */
         .header {
             background: var(--primary);
             color: white;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .header h2 { margin: 0; font-size: 1.5rem; }
+        .profesor-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
 
-        .section { padding: 25px; }
+        .section { padding: 20px 30px; }
         .section-title { 
             color: var(--primary); 
-            font-size: 0.9rem; 
+            font-size: 0.85rem; 
             font-weight: 800; 
             text-transform: uppercase; 
-            margin-bottom: 20px; 
+            margin-bottom: 15px;
             border-left: 4px solid var(--primary);
             padding-left: 10px;
         }
 
-        /* Formulario del Cliente */
-        .grid-inputs {
+        /* Formulario Estudiante */
+        .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
-        .full-width { grid-column: span 2; }
-        .form-group label { display: block; font-size: 0.8rem; margin-bottom: 5px; color: #6b7280; font-weight: 600; }
+        .full { grid-column: span 2; }
         input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
+            width: 100%; padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
             box-sizing: border-box;
-            transition: 0.3s;
+            background: #f9fafb;
+            font-size: 1rem;
         }
-        input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
+        /* GRÁFICO DE GESTIÓN EDUCATIVA */
+        .chart-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 30px;
+        }
+        
+        .bar-group {
+            margin-bottom: 15px;
+        }
+
+        .bar-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar-bg {
+            background: #e5e7eb;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+        /* 4. EXPERIENCIA LABORAL (NUEVA) */
+        .experience-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .exp-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+        .binance-badge {
+            background: var(--binance);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .exp-text { font-size: 0.9rem; color: #4b5563; line-height: 1.5; }
+        .years-badge { color: var(--primary); font-weight: 700; }
 
         /* Carrito de Compras */
         .cart-item {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 0.8fr;
             align-items: center;
-            justify-content: space-between;
             padding: 15px 0;
             border-bottom: 1px solid #f3f4f6;
         }
 
-        .item-info { flex: 1; }
-        .item-info h4 { margin: 0; font-size: 1rem; color: var(--dark); }
-        .item-info p { margin: 2px 0 0; font-size: 0.75rem; color: #9ca3af; }
-
-        /* Columna de Botones Centrada */
-        .controls {
+        .qty-container {
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             gap: 10px;
-            width: 120px; /* Columna fija para alineación */
         }
 
-        .qty-btn {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: var(--white);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombreado solicitado */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            color: var(--dark);
+        .btn-qty {
+            width: 32px; height: 32px; border: none;
+            background: white; border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            cursor: pointer; font-weight: bold;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        .qty-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
-        .qty-btn:active { transform: translateY(0); }
+        .price-tag { text-align: right; font-weight: 700; color: var(--dark); }
 
-        .qty-val { width: 25px; text-align: center; font-weight: bold; }
-
-        .price-tag { width: 90px; text-align: right; font-weight: 700; color: var(--dark); }
-
-        /* Resumen Final */
-        .total-card {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            border: 2px dashed #e5e7eb;
-        }
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.4rem;
-            font-weight: 900;
+        .total-container {
+            margin-top: 20px; padding: 20px;
+            background: #f8fafc; border-radius: 15px;
+            border: 1px dashed #cbd5e1;
+            display: flex; justify-content: space-between;
+            font-size: 1.4rem; font-weight: 800;
         }
 
         .btn-whatsapp {
-            width: 100%;
-            background: var(--success);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: 0.3s;
-        }
-        .btn-whatsapp:hover { background: #1eb956; box-shadow: 0 10px 15px -3px rgba(37, 211, 102, 0.3); }
-
-        @media (max-width: 500px) {
-            .grid-inputs { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-            .controls { width: 100px; gap: 5px; }
+            width: 100%; background: var(--success); color: white;
+            border: none; padding: 18px; border-radius: 12px;
+            font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            margin-top: 20px; display: flex; align-items: center;
+            justify-content: center; gap: 10px;
         }
     </style>
 </head>
@@ -161,127 +180,149 @@
 
 <div class="main-container">
     <div class="header">
-        <h2>Tutor: Gabriel Rafael Grillet Moreno</h2>
-        <h2>Ingeniero Industrial</h2>
-        <h2>Venezuela 🇻🇪 +584249408721</h2>
+        <img src="foto-perfil.jpg" alt="Instructor" class="profesor-img">
+        <h2>Clases sobre Trading y Criptomonedas</h2>
+        <p>📲 Comunidad Gabriel Grillet +584249408721</p>
     </div>
 
     <div class="section">
         <div class="section-title">1. Información del Estudiante</div>
-        <div class="grid-inputs">
-            <div class="form-group full-width">
-                <label>Nombre y Apellido</label>
-                <input type="text" id="nombre" placeholder="Ej: Juan Arismendi">
+        <div class="form-grid">
+            <div class="full"><input type="text" id="nom" placeholder="Nombre y Apellido"></div>
+            <div><input type="text" id="ced" placeholder="Cédula de Identidad"></div>
+            <div><input type="text" id="wha" placeholder="Nro. WhatsApp"></div>
+        </div>
+
+        <div class="section-title">2. Gestión Educativa Febrero 2026</div>
+        <div class="chart-container">
+            <div class="bar-group">
+                <div class="bar-label"><span>Estudiantes Activos (Clase Criptomonedas)</span> <span>1/10</span></div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 10%; background: var(--primary);"></div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Cédula de Identidad</label>
-                <input type="text" id="cedula" placeholder="V-00.000.000">
+            <div class="bar-group">
+                <div class="bar-label"><span> Fase 1 Génesis (Trading) Inscripción</span> <span>9/10</span></div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 60%; background: var(--success);"></div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Nro. WhatsApp</label>
-                <input type="tel" id="whatsapp_cli" placeholder="0412-0000000">
+            <div class="bar-group">
+                <div class="bar-label"><span> Fase 2 Génesis (Trading) Mensualidad</span> <span>4/10</span></div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 22%; background: #f59e0b;"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="section">
-        <div class="section-title">2. Detalles de Clases</div>
+        <div class="section-title">3. Experiencia Laboral</div>
+        <div class="experience-card">
+            <div class="exp-header">
+                <span class="years-badge">+5 Años</span>
+                <span class="binance-badge">Certificación Binance ✔</span>
+            </div>
+            <p class="exp-text">
+                Soy <span class="years-badge">Gabriel Rafael Grillet Moreno,</span> apasionado del sector criptomonedas con más de 5 años analizando <b>mercados bursátiles, aplicaciones usdt o usdc.</b> Certificado por <b>Binance Academy</b> en fundamentos de Blockchain y Trading avanzado. Aliado comercial para <b>Zois Academy</b>
+            
+                
+            
+             <p class="exp-text"> <span class="binance-badge">Certificaciones:</span>
+            </p>1.- Ingeniero Industrial <span class="years-badge">UNEG, </span>Puerto Ordaz 2010</p>
+            </p>2.- Diplomado Componente Docente <b>216 hrs</b> <span class="years-badge">UNEG, </span>Puerto Ordaz 2013</p>
+            </p>3.- Consultor Elearning <b>152 hrs,</b> <span class="years-badge">Aula Global,  </span>Mérida 2015</p>
+            </p>4.- TAE - Tecnología aplicada a la educación <span class="years-badge">FATLA, </span>Ecuador 2012</p>
+            </p>5.- Bootcamp Criptomonedas <span class="years-badge">Binance, </span>Binance Academy 2023</p>
+            
+            </p>
+        </div>
+
+        <div class="section-title">4. Inscripción</div>
         
         <div class="cart-item">
             <div class="item-info">
-                <h4>Criptomonedas Básico</h4>
-                <p>Lunes-Martes-Miércoles | 6:00pm 7:30pm</p>
-                <p>VES, USDT, USDC </p>
+                
+                 <h4>Criptomonedas I  (3 hrs)</h4>
+                 
+                <p>VES, USDT, USDC</p>
+                <p>Lunes- Martes- Miércoles</p>
+                <p>6:00pm - 7:30pm</p>
             </div>
-            <div class="controls">
-                <button class="qty-btn" onclick="update('cripto', -1)">-</button>
-                <span class="qty-val" id="q-cripto">1</span>
-                <button class="qty-btn" onclick="update('cripto', 1)">+</button>
+            <div class="qty-container">
+                <button class="btn-qty" onclick="update('cripto', -1)">-</button>
+                <span id="q-cripto" style="font-weight:bold; width:20px; text-align:center;">1</span>
+                <button class="btn-qty" onclick="update('cripto', 1)">+</button>
             </div>
             <div class="price-tag" id="p-cripto">$16.00</div>
         </div>
 
         <div class="cart-item">
             <div class="item-info">
-                <h4>Trading: Inscripción</h4>
-                <p>Pago Administrativo</p>
+                <h4>Criptomonedas  II (16 hrs)</h4>
+                <p>Billeteras centralizadas y descentralizadas</p>
+                <p>Sábados y Domingo</p><p> 8:00am - 6:00pm</p>
             </div>
-            <div class="controls">
-                <button class="qty-btn" onclick="update('ins', -1)">-</button>
-                <span class="qty-val" id="q-ins">1</span>
-                <button class="qty-btn" onclick="update('ins', 1)">+</button>
+        
+            <div class="qty-container">
+                <button class="btn-qty" onclick="update('cripto2', -1)">-</button>
+                <span id="q-cripto2" style="font-weight:bold; width:20px; text-align:center;">1</span>
+                <button class="btn-qty" onclick="update('cripto2', 1)">+</button>
+            </div>
+            <div class="price-tag" id="p-cripto2">$180.00</div>
+        </div>
+
+        <div class="cart-item">
+            <div class="item-info"><h4>Trading: Inscripción</h4><p>Pago único</p>
+            <p>Programa Génesis</p>
+            </div>
+            <div class="qty-container">
+                <button class="btn-qty" onclick="update('ins', -1)">-</button>
+                <span id="q-ins" style="font-weight:bold; width:20px; text-align:center;">1</span>
+                <button class="btn-qty" onclick="update('ins', 1)">+</button>
             </div>
             <div class="price-tag" id="p-ins">$4.00</div>
         </div>
 
         <div class="cart-item">
-            <div class="item-info">
-                <h4>Trading: Mensualidad</h4>
-                <p>Lunes-Martes-Miércoles | 8:00pm 9:30pm</p>
-                 <p>Oro, Cripto, Sintéticos </p>
-            </div>
-            <div class="controls">
-                <button class="qty-btn" onclick="update('mensual', -1)">-</button>
-                <span class="qty-val" id="q-mensual">1</span>
-                <button class="qty-btn" onclick="update('mensual', 1)">+</button>
+            <div class="item-info"><h4>Trading: Mensualidad</h4><p>Lunes- Martes- Miércoles</p>
+                <p>8:00pm - 9:30pm</p>
+                <p>Programa Génesis</p></div>
+            <div class="qty-container">
+                <button class="btn-qty" onclick="update('mensual', -1)">-</button>
+                <span id="q-mensual" style="font-weight:bold; width:20px; text-align:center;">1</span>
+                <button class="btn-qty" onclick="update('mensual', 1)">+</button>
             </div>
             <div class="price-tag" id="p-mensual">$52.00</div>
         </div>
 
-        <div class="total-card">
-            <div class="total-row">
-                <span>Total a Pagar:</span>
-                <span id="grand-total">$72.00 USD</span>
-            </div>
+        <div class="total-container">
+            <span>Total:</span>
+            <span id="total-val">$252.00 USD</span>
         </div>
 
-        <button class="btn-whatsapp" onclick="enviar()">
-            <span>Enviar Recibo por WhatsApp</span>
+        <button class="btn-whatsapp" onclick="enviarRecibo()">
+            Enviar Recibo al Instructor
         </button>
     </div>
 </div>
 
 <script>
-    const prices = { cripto: 16, ins: 4, mensual: 52 };
-    const qtys = { cripto: 1, ins: 1, mensual: 1 };
+    const precios = { cripto: 16, cripto2: 180, ins: 4, mensual: 52 };
+    const cantidades = { cripto: 1, cripto2: 1, ins: 1, mensual: 1 };
 
     function update(item, val) {
-        if (qtys[item] + val < 0) return;
-        qtys[item] += val;
-        
-        document.getElementById(`q-${item}`).innerText = qtys[item];
-        document.getElementById(`p-${item}`).innerText = `$${(qtys[item] * prices[item]).toFixed(2)}`;
-        
-        const total = (qtys.cripto * prices.cripto) + (qtys.ins * prices.ins) + (qtys.mensual * prices.mensual);
-        document.getElementById('grand-total').innerText = `$${total.toFixed(2)} USD`;
+        if (cantidades[item] + val < 0) return;
+        cantidades[item] += val;
+        document.getElementById(`q-${item}`).innerText = cantidades[item];
+        document.getElementById(`p-${item}`).innerText = `$${(cantidades[item] * precios[item]).toFixed(2)}`;
+        const total = (cantidades.cripto * 16)+(cantidades.cripto2 * 180)+ (cantidades.ins * 4) + (cantidades.mensual * 52);
+        document.getElementById('total-val').innerText = `$${total.toFixed(2)} USD`;
     }
 
-    function enviar() {
-        const n = document.getElementById('nombre').value;
-        const c = document.getElementById('cedula').value;
-        const w = document.getElementById('whatsapp_cli').value;
-        const total = document.getElementById('grand-total').innerText;
-
-        if(!n || !c || !w) {
-            alert("⚠️ Por favor completa los datos del cliente.");
-            return;
-        }
-
-        let msg = `*RECIBO DE INSCRIPCIÓN*%0A`;
-        msg += `--------------------------%0A`;
-        msg += `*Estudiante:* ${n}%0A`;
-        msg += `*Cédula:* ${c}%0A`;
-        msg += `*WhatsApp:* ${w}%0A`;
-        msg += `--------------------------%0A`;
-        if(qtys.cripto > 0) msg += `• Cripto (${qtys.cripto}): $${(qtys.cripto * 16).toFixed(2)}%0A`;
-        if(qtys.ins > 0) msg += `• Trading Ins. (${qtys.ins}): $${(qtys.ins * 4).toFixed(2)}%0A`;
-        if(qtys.mensual > 0) msg += `• Trading Mens. (${qtys.mensual}): $${(qtys.mensual * 52).toFixed(2)}%0A`;
-        msg += `--------------------------%0A`;
-        msg += `*TOTAL FINAL: ${total}*`;
-        msg += `--------------------------%0A`;
-        msg += `*Gracias por unirte a la academia *`;
-        const phone = "584249408721";
-        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    function enviarRecibo() {
+        const n = document.getElementById('nom').value;
+        const t = document.getElementById('total-val').innerText;
+        if(!n) return alert("Ingresa tu nombre");
+        window.open(`https://wa.me/584249408721?text=Inscripción: ${n} - Total: ${t}`, '_blank');
     }
 </script>
 
