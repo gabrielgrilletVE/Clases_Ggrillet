@@ -318,12 +318,23 @@
         document.getElementById('total-val').innerText = `$${total.toFixed(2)} USD`;
     }
 
-    function enviarRecibo() {
+        function enviarRecibo() {
         const n = document.getElementById('nom').value;
+        const c = document.getElementById('ced').value;
         const t = document.getElementById('total-val').innerText;
-        if(!n) return alert("Ingresa tu nombre");
-        window.open(`https://wa.me/584249408721?text=Inscripción: ${n} - Total: ${t}`, '_blank');
+        if(!n || !c) return alert("Por favor rellena tus datos.");
+        
+        let msg = `*SOLICITUD DE INSCRIPCIÓN*%0A`;
+        msg += `*Instructor:* Gabriel Grillet%0A`;
+        msg += `*Estudiante:* ${n}%0A`;
+        msg += `*Cédula:* ${c}%0A`;
+        msg += `*Monto Total:* ${t}%0A`;
+        msg += `--------------------------%0A`;
+        msg += `_Enviado desde el Gestor Educativo_`;
+        
+        window.open(`https://wa.me/584249408721?text=${msg}`, '_blank');
     }
+
 </script>
 
 </body>
