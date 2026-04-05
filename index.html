@@ -294,15 +294,15 @@
 </div>
 
 <script>
-    const precios = { cripto: 16, cripto2: 180, ins: 4, mensual: 52 };
-    const cantidades = { cripto: 1, cripto2: 1, ins: 1, mensual: 1 };
+    const precios = { cripto: 16, cripto2: 120,  mensual: 16 };
+    const cantidades = { cripto: 1, cripto2: 1,  mensual: 1 };
 
     function update(item, val) {
         if (cantidades[item] + val < 0) return;
         cantidades[item] += val;
         document.getElementById(`q-${item}`).innerText = cantidades[item];
         document.getElementById(`p-${item}`).innerText = `$${(cantidades[item] * precios[item]).toFixed(2)}`;
-        const total = (cantidades.cripto * 16)+(cantidades.cripto2 * 180)+ (cantidades.ins * 4) + (cantidades.mensual * 52);
+        const total = (cantidades.cripto * 16)+(cantidades.cripto2 * 120)+  (cantidades.mensual * 16);
         document.getElementById('total-val').innerText = `$${total.toFixed(2)} USD`;
     }
 
