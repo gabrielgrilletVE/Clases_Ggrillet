@@ -284,7 +284,7 @@
 
         <div class="total-container">
             <span>Total:</span>
-            <span id="total-val">$252.00 USD</span>
+            <span id="total-val">$152.00 USD</span>
         </div>
 
         <button class="btn-whatsapp" onclick="enviarRecibo()">
@@ -331,9 +331,7 @@
         if (cantidades.cripto2 > 0) {
            msg += `• Cripto Avanzado (${cantidades.cripto2}): $${(cantidades.cripto2 * 180).toFixed(2)}%0A`;
             }
-        if (cantidades.ins > 0) {
-           msg += `• Trading Inscripción (${cantidades.ins}): $${(cantidades.ins * 4).toFixed(2)}%0A`;
-           }
+                  
         if (cantidades.mensual > 0) {
         msg += `• Trading Mensual (${cantidades.mensual}): $${(cantidades.mensual * 52).toFixed(2)}%0A`;
            }
